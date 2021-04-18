@@ -1,0 +1,54 @@
+version: "3"
+networks:
+    iiq:
+volumes:
+    db_volume:
+services:
+    db:
+        build: ./mysql
+        image: mysql-iiq
+        container_name: db
+        ports:
+            - "3306:3306"
+        volumes:
+            - db_volume:/var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=$DB_PASS
+            - MYSQL_ROOT_HOST=%
+            - TZ=Europe/Madrid
+        hostname: mysql.local
+        networks:
+            iiq:
+                aliases:
+                    - mysql.local
+    tomcat:
+        build: ./tomcat
+        image: bitnami/tomcat
+        container_name: tomcat
+        ports:
+            - "8080:8080"
+            - "8001:8001"
+        environment:
+            - TOMCAT_USERNAME=${TOMCAT_USER}
+            - TOMCAT_PASSWORD=${TOMCAT_PASS}
+            - TOMCAT_ALLOW_REMOTE_MANAGEMENT=1
+            - JAVA_OPTS=${JAVA_OPTS}
+        hostname: iiq.local
+        volumes:
+            - "./volumes/tomcat_data:/bitnami/tomcat/data"
+            - "./volumes/tomcat_logs:/opt/bitnami/tomcat/logs"
+        networks:
+            iiq:
+                aliases:
+                    - iiq.local
+    email:
+        build: ./email
+        image: mailhog-iiq
+        container_name: email
+        ports:
+            - "8025:8025"
+        hostname: email.local
+        networks:
+            iiq:
+                aliases:
+                    - email.local
