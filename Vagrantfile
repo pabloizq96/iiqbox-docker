@@ -1,6 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
-hostname = "iiqbox"
+hostname = "iiqbox-docker"
 memory = 8192
 cpus = 4
 Vagrant.configure("2") do |config|

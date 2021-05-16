@@ -8,7 +8,7 @@ FROM mysql:5.7
 RUN sed -i 's~,STRICT_TRANS_TABLES~~' /etc/mysql/my.cnf && \
     sed -i 's~,STRICT_TRANS_TABLES~~' /etc/mysql/my.cnf && \
     echo "[mysqld]" >> /etc/mysql/my.cnf && \
-    echo "default_time_zone = Europe/Madrid" >> /etc/mysql/my.cnf && \
+    echo "default-time-zone = Europe/Madrid" >> /etc/mysql/my.cnf && \
     echo "innodb_large_prefix = 1" >> /etc/mysql/my.cnf && \
     echo "innodb_file_per_table = 1" >> /etc/mysql/my.cnf
 

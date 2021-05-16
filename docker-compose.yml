@@ -35,7 +35,7 @@ services:
             - JAVA_OPTS=${JAVA_OPTS}
         hostname: iiq.local
         volumes:
-            - "./volumes/tomcat_data:/bitnami/tomcat/data"
+            - "./volumes/tomcat_data:/bitnami/tomcat/data/"
             - "./volumes/tomcat_logs:/opt/bitnami/tomcat/logs"
         networks:
             iiq:
